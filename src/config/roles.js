@@ -10,6 +10,7 @@ const roleIds = {
 const resources = {
 	USERINFO: 'user',
 	ROLE: 'role',
+	BOOK: 'book'
 };
 
 const grantsObject = {
@@ -26,6 +27,12 @@ const grantsObject = {
 			'update:any': ['*'],
 			'delete:any': ['*'],
 		},
+		[resources.BOOK]: {
+			'create:any': ['*'],
+			'read:any': ['*'],
+			'update:any': ['*'],
+			'delete:any': ['*'],
+		},
 	},
 	[roleIds.USER]: {
 		[resources.USERINFO]: {
@@ -33,6 +40,9 @@ const grantsObject = {
 			'read:own': ['*'],
 			'update:own': ['*'],
 			'delete:own': ['*'],
+		},
+		[resources.BOOK]: {
+			'read:any': ['*'],
 		},
 	},
 };

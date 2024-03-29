@@ -50,6 +50,10 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: 'role_id',
 			onDelete: 'CASCADE',
 		});
+		user.hasMany(models.borrowed_book, {
+			foreignKey: 'id',
+			onDelete: 'CASCADE',
+		});
 	};
 
 	return user;
