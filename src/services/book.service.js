@@ -2,10 +2,11 @@ const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
 const db = require('../db/models');
 const { Op } = require('sequelize');
-const getOffset = require('../utils/query');
+const { getOffset } = require('../utils/query');
+const config = require('../config/config');
 
 const createBook = async (body) => {
-    const prevBook = await db.findOne({
+    const prevBook = await db.book.findOne({
         where: {
             [Op.or]: [
                 { ISBN: body.ISBN },
@@ -14,11 +15,13 @@ const createBook = async (body) => {
         }
     });
 
+    console.log(body)
+
     if (prevBook) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'ISBN or title in use by another book');
     }
 
-    const book = await Book.create(body);
+    const book = await db.book.create(body);
     return book;
 }
 
@@ -73,8 +76,10 @@ const updateBook = async (bookId, body) => {
             ]
         }
     });
+    console.log(prevBook.id)
+    console.log(bookId)
 
-    if (prevBook) {
+    if (prevBook.id != bookId) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'Title or ISBN in use by another book');
     }
     

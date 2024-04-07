@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
 			onDelete: 'CASCADE',
 		});
 		user.hasMany(models.borrowed_book, {
-			foreignKey: 'id',
+			foreignKey: 'user_id',
 			onDelete: 'CASCADE',
 		});
 	};

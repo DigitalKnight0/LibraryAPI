@@ -1,6 +1,6 @@
 const Joi = require('@hapi/joi');
 
-const CATEGORIES = ['horror']
+const CATEGORIES = ['horror', 'fiction','Romance']
 
 const createBook = {
     body: Joi.object().keys({
@@ -8,7 +8,7 @@ const createBook = {
         author: Joi.string().required(),
         ISBN: Joi.string().required(),
         price: Joi.number().required(),
-        publish_year: Joi.number().required(),
+        published_year: Joi.number().required(),
         category: Joi.string().lowercase().valid(...CATEGORIES).required(),
     })
 }
@@ -42,7 +42,7 @@ const updateBook = {
         author: Joi.string(),
         ISBN: Joi.string(),
         price: Joi.number(),
-        publish_year: Joi.number(),
+        published_year: Joi.number(),
         category: Joi.string().lowercase().valid(...CATEGORIES),
     }).min(1)
 }
